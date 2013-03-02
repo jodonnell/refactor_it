@@ -4,7 +4,7 @@
     = link_to 'Down', down_vote_path(refactored_code_id: refactored_code.id)
     %div
       = refactored_code.email
-      = "-"
+      = "/"
       = pluralize(refactored_code.votes, 'vote')
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
       = refactored_code.refactored_code.gsub("\n", '<br/>').gsub(" ", "&nbsp;").html_safe
