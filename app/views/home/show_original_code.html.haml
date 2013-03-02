@@ -1,0 +1,11 @@
+%pre
+  :plain
+    def fuck_a_duck
+      'this is the method'
+    end
+
+
+= form_tag submit_refactored_code_path do
+  = text_area_tag :refactored_code
+  %br/
+  = submit_tag 'Your refactored code'
