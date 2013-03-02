@@ -1,0 +1,17 @@
+- @refactored_codes.each do |refactored_code|
+  %div{style: 'margin-bottom: 40px; margin-left: 10px;'}
+    = link_to 'Up', up_vote_path(refactored_code_id: refactored_code.id)
+    = link_to 'Down', down_vote_path(refactored_code_id: refactored_code.id)
+    %div
+      = refactored_code.email
+      = "-"
+      = pluralize(refactored_code.votes, 'vote')
+    %div{style: 'margin-top: 5px; margin-left: 20px;'}
+      = refactored_code.refactored_code.gsub("\n", '<br/>').gsub(" ", "&nbsp;").html_safe
+
+Original code:
+%pre
+  :plain
+    def fuck_a_duck
+      'this is the method'
+    end

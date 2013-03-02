@@ -14,5 +14,23 @@ class HomeController < ApplicationController
   end
 
   def submit_refactored_code
+    RefactoredCode.create :email => session[:email], :refactored_code => params[:refactored_code]
+    redirect_to list_refactored_code_path
+  end
+
+  def list_refactored_code
+    @refactored_codes = RefactoredCode.order('votes desc')
+  end
+
+  def up_vote
+    rc = RefactoredCode.find params[:refactored_code_id]
+    rc.update_attribute(:votes, rc.votes + 1)
+    redirect_to list_refactored_code_path
+  end
+
+  def down_vote
+    rc = RefactoredCode.find params[:refactored_code_id]
+    rc.update_attribute(:votes, rc.votes - 1)
+    redirect_to list_refactored_code_path
   end
 end
