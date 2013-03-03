@@ -25,6 +25,10 @@ describe QueryStringParser do
     expect(QueryStringParser.new('http://www.example.com?value=boom+bam').queryHash).to eq({value: 'boom bam'})
   end
 
+  it "can decode %26" do
+    expect(QueryStringParser.new('http://www.example.com?value=boom+%26+bam').queryHash).to eq({value: 'boom & bam'})
+  end
+
 
 
 end

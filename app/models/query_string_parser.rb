@@ -17,6 +17,7 @@ class QueryStringParser
     @hash.each do |key, value| 
       if value
         results[key] = value.gsub('+', ' ')
+        results[key] = results[key].gsub('%26', '&')
       else
         results[key] = value
       end
