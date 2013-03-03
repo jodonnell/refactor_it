@@ -8,7 +8,7 @@ class QueryStringParser
       @hash = {}
       q_array.each do |part|
         parts = part.split('=', 2)
-        if parts[0].nil?
+        if parts[0].nil? or parts[0] == ''
           next
         end
         if @hash.key? parts[0]

@@ -41,4 +41,8 @@ describe QueryStringParser do
     expect(QueryStringParser.new('http://www.example.com?a&&b').queryHash).to eq({'a' => nil, 'b' => nil})
   end
 
+  it "can ignore empty keys" do
+    expect(QueryStringParser.new('http://www.example.com?pow&=pow2').queryHash).to eq({'pow' => nil})
+  end
+
 end
