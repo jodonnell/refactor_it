@@ -8,12 +8,10 @@
       = "/"
       = pluralize(refactored_code.vote_tally, 'vote')
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
-      %pre{class: 'prettyprint'}
-        %code{class: 'language-rb'}
-          = refactored_code.refactored_code.gsub("\n", '').html_safe
+      %pre{class: 'prettyprint linenums lang-rb'}
+        = refactored_code.refactored_code.gsub("\n", '').html_safe
 
 Original code:
-%pre{class: 'prettyprint'}
-  %code{class: 'language-rb'}
-    :plain
-      #{@bad_code}
+%pre{class: 'prettyprint linenums lang-rb'}
+  :plain
+    #{@bad_code}
