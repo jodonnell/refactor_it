@@ -8,6 +8,9 @@ class QueryStringParser
       @hash = {}
       q_array.each do |part|
         parts = part.split('=', 2)
+        if parts[0].nil?
+          next
+        end
         if @hash.key? parts[0]
           if @hash[parts[0]].is_a? Array
             @hash[parts[0]].push(parts[1])

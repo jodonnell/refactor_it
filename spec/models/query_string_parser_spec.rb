@@ -36,4 +36,9 @@ describe QueryStringParser do
   it "can turn the same keys into an array" do
     expect(QueryStringParser.new('http://www.example.com?key=value1&key=value2&key=value3').queryHash).to eq({'key' => ['value1', 'value2', 'value3']})
   end
+
+  it "can ignore an empty value" do
+    expect(QueryStringParser.new('http://www.example.com?a&&b').queryHash).to eq({'a' => nil, 'b' => nil})
+  end
+
 end
