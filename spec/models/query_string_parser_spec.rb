@@ -14,8 +14,17 @@ describe QueryStringParser do
   end
 
   it "can handle two = signs without a seperating &" do
-    pending
     expect(QueryStringParser.new('http://www.example.com?poop=pam=pamper').queryHash).to eq({poop: 'pam=pamper'})
   end
+
+  it "can handle no argument queries" do
+    expect(QueryStringParser.new('http://www.example.com?poop&pam=power&ping').queryHash).to eq({poop: nil, pam: "power", ping: nil})
+  end
+
+  it "can turn a + into a space" do
+    expect(QueryStringParser.new('http://www.example.com?value=boom+bam').queryHash).to eq({value: 'boom bam'})
+  end
+
+
 
 end
