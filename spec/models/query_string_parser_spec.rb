@@ -18,7 +18,7 @@ describe QueryStringParser do
   end
 
   it "can handle no argument queries" do
-    expect(QueryStringParser.new('http://www.example.com?poop&pam=power&ping').queryHash).to eq({'poop' => nil, 'pam' => "power", 'ping' => nil})
+    expect(QueryStringParser.new('http://www.example.com?poop&pam=power&ping=').queryHash).to eq({'poop' => nil, 'pam' => "power", 'ping' => ""})
   end
 
   it "can turn a + into a space" do
@@ -33,6 +33,7 @@ describe QueryStringParser do
     expect(QueryStringParser.new('http://www.example.com?boom+%26+bam=value').queryHash).to eq({'boom & bam' => 'value'})
   end
 
-
-
+  it "can turn the same keys into an array" do
+    expect(QueryStringParser.new('http://www.example.com?key=value1&key=value2&key=value3').queryHash).to eq({'key' => ['value1', 'value2', 'value3']})
+  end
 end
