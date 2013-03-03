@@ -21,18 +21,26 @@ class HomeController < ApplicationController
 
   def list_refactored_code
     bad_code
-    @refactored_codes = RefactoredCode.order('votes desc')
+    @refactored_codes = RefactoredCode.includes(:votes)
+    @refactored_codes.sort! {|x, y| y.vote_tally <=> x.vote_tally }
   end
 
   def up_vote
-    rc = RefactoredCode.find params[:refactored_code_id]
-    rc.update_attribute(:votes, rc.votes + 1)
+    rc_id = params[:refactored_code_id]
+    votes = Vote.where(email: session[:email]).where(refactored_code_id: rc_id)
+    if votes.size == 0
+      Vote.create(email: session[:email], refactored_code_id: rc_id, :num => 1)
+    end
+
     redirect_to list_refactored_code_path
   end
 
   def down_vote
-    rc = RefactoredCode.find params[:refactored_code_id]
-    rc.update_attribute(:votes, rc.votes - 1)
+    rc_id = params[:refactored_code_id]
+    votes = Vote.where(email: session[:email]).where(refactored_code_id: rc_id)
+    if votes.size == 0
+      Vote.create(email: session[:email], refactored_code_id: rc_id, :num => -1)
+    end
     redirect_to list_refactored_code_path
   end
 

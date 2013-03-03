@@ -11,12 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302222948) do
+ActiveRecord::Schema.define(:version => 20130303045926) do
 
   create_table "refactored_codes", :force => true do |t|
-    t.string  "email",           :default => "", :null => false
-    t.text    "refactored_code"
-    t.integer "votes",           :default => 0,  :null => false
+    t.string "email",           :default => "", :null => false
+    t.text   "refactored_code"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.string  "email",              :default => "", :null => false
+    t.integer "refactored_code_id"
+    t.integer "num"
   end
 
 end

@@ -1,12 +1,12 @@
 - @refactored_codes.each do |refactored_code|
   %div{style: 'margin-bottom: 40px; margin-left: 10px;'}
-    - if refactored_code.email != session[:email]
+    - if refactored_code.email != session[:email] && refactored_code.votes.find_by_email(session[:email]).nil?
       = link_to 'Up', up_vote_path(refactored_code_id: refactored_code.id)
       = link_to 'Down', down_vote_path(refactored_code_id: refactored_code.id)
     %div
       = refactored_code.email
       = "/"
-      = pluralize(refactored_code.votes, 'vote')
+      = pluralize(refactored_code.vote_tally, 'vote')
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
       %pre{class: 'prettyprint'}
         %code{class: 'language-rb'}
