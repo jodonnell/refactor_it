@@ -8,6 +8,6 @@ class RefactoredCode < ActiveRecord::Base
     votes.each do |vote|
       sum += vote.num
     end
-    sum
+    sum.to_f / votes.size
   end
 end

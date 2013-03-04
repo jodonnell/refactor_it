@@ -4,8 +4,7 @@ RefactorIt::Application.routes.draw do
   match 'show_original_code' => 'home#show_original_code'
   match 'submit_refactored_code' => 'home#submit_refactored_code'
   match 'list_refactored_code' => 'home#list_refactored_code'
-  match 'up_vote' => 'home#up_vote'
-  match 'down_vote' => 'home#down_vote'
+  match 'rate' => 'home#rate'
 
 
   # The priority is based upon order of creation:

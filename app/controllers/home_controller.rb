@@ -25,22 +25,13 @@ class HomeController < ApplicationController
     @refactored_codes.sort! {|x, y| y.vote_tally <=> x.vote_tally }
   end
 
-  def up_vote
+  def rate
     rc_id = params[:refactored_code_id]
     votes = Vote.where(email: session[:email]).where(refactored_code_id: rc_id)
     if votes.size == 0
-      Vote.create(email: session[:email], refactored_code_id: rc_id, :num => 1)
+      Vote.create(email: session[:email], refactored_code_id: rc_id, :num => params[:rate])
     end
 
-    redirect_to list_refactored_code_path
-  end
-
-  def down_vote
-    rc_id = params[:refactored_code_id]
-    votes = Vote.where(email: session[:email]).where(refactored_code_id: rc_id)
-    if votes.size == 0
-      Vote.create(email: session[:email], refactored_code_id: rc_id, :num => -1)
-    end
     redirect_to list_refactored_code_path
   end
 
@@ -50,5 +41,6 @@ class HomeController < ApplicationController
 
   def bad_code_specs
     @bad_code_specs = File.open("#{Rails.root}/spec/models/query_string_parser_spec.rb", 'r') { |f| f.read }
+    @bad_code_specs.gsub!('require "spec_helper"', '')
   end
 end

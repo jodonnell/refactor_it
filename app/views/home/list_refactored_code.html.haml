@@ -1,12 +1,26 @@
 - @refactored_codes.each do |refactored_code|
   %div{style: 'margin-bottom: 40px; margin-left: 10px;'}
     - if refactored_code.email != session[:email] && refactored_code.votes.find_by_email(session[:email]).nil?
-      = link_to 'Up', up_vote_path(refactored_code_id: refactored_code.id)
-      = link_to 'Down', down_vote_path(refactored_code_id: refactored_code.id)
+      = form_tag rate_path do
+        = hidden_field_tag :refactored_code_id, refactored_code.id
+        = label_tag 'rate_1', '1'
+        = radio_button_tag :rate, '1'
+        = label_tag 'rate_2', '2'
+        = radio_button_tag :rate, '2'
+        = label_tag 'rate_3', '3'
+        = radio_button_tag :rate, '3'
+        = label_tag 'rate_4', '4'
+        = radio_button_tag :rate, '4'
+        = label_tag 'rate_5', '5'
+        = radio_button_tag :rate, '5'
+        = submit_tag 'Vote'
     %div
       = refactored_code.email
       = "/"
-      = pluralize(refactored_code.vote_tally, 'vote')
+      = refactored_code.vote_tally
+      average with
+      = pluralize(refactored_code.votes.size, 'vote')
+      total.
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
       %pre{class: 'prettyprint linenums lang-rb'}
         = refactored_code.refactored_code.gsub("\n", '').html_safe
