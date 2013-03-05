@@ -15,7 +15,8 @@ class HomeController < ApplicationController
   end
 
   def submit_refactored_code
-    RefactoredCode.create :email => session[:email], :refactored_code => params[:refactored_code]
+    anonymous = params.key?(:anonymous) ? true : false
+    RefactoredCode.create :email => session[:email], :refactored_code => params[:refactored_code], :anonymous => anonymous
     redirect_to list_refactored_code_path
   end
 

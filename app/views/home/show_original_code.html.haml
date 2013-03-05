@@ -11,8 +11,13 @@ The tests:
       #{@bad_code_specs}
 
 
-Input your refactored code:
+
 = form_tag submit_refactored_code_path do
+  = check_box_tag :anonymous
+  = label_tag :anonymous, 'Post my code anonymously'
+  %br/
+  Input your refactored code:
+  %br/
   = text_area_tag :refactored_code, '', :size => '140x20'
   %br/
   = submit_tag 'Your refactored code'

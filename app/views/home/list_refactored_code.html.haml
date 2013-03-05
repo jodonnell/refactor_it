@@ -22,7 +22,10 @@
 
         = submit_tag 'Vote'
     %div
-      = refactored_code.email
+      - if refactored_code.anonymous?
+        = 'Anonymous'
+      - else      
+        = refactored_code.email
       = "/"
       = refactored_code.vote_tally
       average with

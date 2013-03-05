@@ -1,5 +1,5 @@
 class RefactoredCode < ActiveRecord::Base
-  attr_accessible :email, :refactored_code
+  attr_accessible :email, :refactored_code, :anonymous
 
   has_many :votes
 
@@ -10,5 +10,9 @@ class RefactoredCode < ActiveRecord::Base
       sum += vote.num
     end
     sum.to_f / votes.size
+  end
+
+  def anonymous?
+    anonymous
   end
 end
