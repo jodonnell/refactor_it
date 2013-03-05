@@ -2,6 +2,7 @@ class RefactoredCode < ActiveRecord::Base
   attr_accessible :email, :refactored_code, :anonymous
 
   has_many :votes
+  has_many :comments
 
   def vote_tally
     return 0 if votes.size == 0

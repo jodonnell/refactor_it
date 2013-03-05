@@ -34,6 +34,14 @@
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
       %pre{class: 'prettyprint linenums lang-rb'}
         = refactored_code.refactored_code.gsub("\n", '').html_safe
+      - refactored_code.comments.each do |comment|      
+        .comment{:style => 'margin-bottom: 10px'}
+          %span{:style => 'margin-right: 10px;'}= comment.email
+          = comment.comment
+      = form_tag comment_path do
+        = hidden_field_tag :refactored_code_id, refactored_code.id        
+        = text_area_tag :comment, '', :size => '80x3'
+        = submit_tag 'Comment'
 
 Original code:
 %pre{class: 'prettyprint linenums lang-rb'}

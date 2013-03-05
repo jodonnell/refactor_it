@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305020801) do
+ActiveRecord::Schema.define(:version => 20130305023306) do
+
+  create_table "comments", :force => true do |t|
+    t.string  "email",              :default => "", :null => false
+    t.integer "refactored_code_id", :default => 0,  :null => false
+    t.string  "comment"
+  end
 
   create_table "refactored_codes", :force => true do |t|
     t.string  "email",           :default => "", :null => false
