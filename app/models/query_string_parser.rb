@@ -26,7 +26,7 @@ class QueryStringParser
     end
   end
 
-  def queryHash
+  def query_hash
     results = {}
     @hash.each do |key, value| 
       if value.is_a? Array
