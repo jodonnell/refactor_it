@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305023306) do
+ActiveRecord::Schema.define(:version => 20130306024413) do
 
   create_table "comments", :force => true do |t|
     t.string  "email",              :default => "", :null => false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130305023306) do
     t.string  "email",           :default => "", :null => false
     t.text    "refactored_code"
     t.boolean "anonymous"
+    t.string  "language"
   end
 
   create_table "votes", :force => true do |t|

@@ -5,6 +5,7 @@
     - if refactored_code.email != session[:email] && refactored_code.votes.find_by_email(session[:email]).nil?
       = form_tag rate_path do
         = hidden_field_tag :refactored_code_id, refactored_code.id
+        = hidden_field_tag :language, @language
         = radio_button_tag :rate, '1'
         = label_tag 'rate_1', '1'
 
@@ -39,7 +40,8 @@
           %span{:style => 'margin-right: 10px;'}= comment.email
           = comment.comment
       = form_tag comment_path do
-        = hidden_field_tag :refactored_code_id, refactored_code.id        
+        = hidden_field_tag :refactored_code_id, refactored_code.id
+        = hidden_field_tag :language, @language
         = text_area_tag :comment, '', :size => '80x3'
         = submit_tag 'Comment'
 

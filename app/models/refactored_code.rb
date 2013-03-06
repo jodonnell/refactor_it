@@ -1,5 +1,5 @@
 class RefactoredCode < ActiveRecord::Base
-  attr_accessible :email, :refactored_code, :anonymous
+  attr_accessible :email, :refactored_code, :anonymous, :language
 
   has_many :votes
   has_many :comments

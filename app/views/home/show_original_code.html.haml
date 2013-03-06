@@ -13,6 +13,7 @@ The tests:
 
 
 = form_tag submit_refactored_code_path do
+  = hidden_field_tag :language, @language
   = check_box_tag :anonymous
   = label_tag :anonymous, 'Post my code anonymously'
   %br/
