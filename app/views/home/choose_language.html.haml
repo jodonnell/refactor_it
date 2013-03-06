@@ -7,13 +7,22 @@ Choose the language you would like to refactor in:
     = pluralize(RefactoredCode.where(:language => 'ruby').count, 'answer')
     for this language.
   %br/
+
   = radio_button_tag :language, 'python'
   = label_tag :language_python, 'Python'
   %span{:style => 'margin-left: 60px'}
     = pluralize(RefactoredCode.where(:language => 'python').count, 'answer')
     for this language.
-
   %br/
+
+  = radio_button_tag :language, 'js'
+  = label_tag :language_python, 'JavaScript'
+  %span{:style => 'margin-left: 60px'}
+    = pluralize(RefactoredCode.where(:language => 'js').count, 'answer')
+    for this language.
+  %br/
+
+
   %br/
   = submit_tag 'Choose'
   

@@ -27,6 +27,10 @@ class HomeController < ApplicationController
     elsif @language == 'python'
       @bad_code = File.open("#{Rails.root}/code/query_string_parser.py", 'r') { |f| f.read }
       @bad_code_specs = File.open("#{Rails.root}/code/query_string_parser_test.py", 'r') { |f| f.read }
+    elsif @language == 'js'
+      @spec_instructions = 'To run the specs you will need Jasmine which you can download here: https://github.com/pivotal/jasmine/downloads.  Unzip it, copy the code below into the spec directory in the unzipped jasmine folder, name it query_string_parser_spec.js.  In the src directory create query_string_parser.js, this is where your code will go.  Edit the SpecRunner.html file and change the includes under <!-- include source files here... --> and <!-- include spec files here... --> to point to the files you just created.  Now open this file in your browser to run the specs.'
+      @bad_code = File.open("#{Rails.root}/code/js/src/query_string_parser.js", 'r') { |f| f.read }
+      @bad_code_specs = File.open("#{Rails.root}/code/js/spec/query_string_parser_spec.js", 'r') { |f| f.read }
     end
   end
 
