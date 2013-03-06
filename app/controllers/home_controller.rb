@@ -1,12 +1,22 @@
 class HomeController < ApplicationController
+  before_filter :is_logged_in, :except => [:index, :login]
+
+  def is_logged_in
+    if session[:email].blank?
+      redirect_to root_path
+    end
+  end
+
   def index
-    
   end
 
   def login
     email = params[:email]
     session[:email] = email
     redirect_to choose_language_path
+  end
+
+  def choose_language
   end
 
   def show_original_code
