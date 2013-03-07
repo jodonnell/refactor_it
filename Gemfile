@@ -1,4 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+
+ruby "2.0.0"
+
 
 gem 'rails', '3.2.12'
 
@@ -13,7 +16,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", "~> 2.0"
-  gem 'debugger'
+  gem 'debugger', '1.4.0'
 end
 
 group :production do
