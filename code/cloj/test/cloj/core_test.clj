@@ -16,7 +16,7 @@
     (is (= {"poop" "pam=pamper"} (query-hash "http://www.example.com?poop=pam=pamper"))))
 
   (testing "can handle no argument queries"
-    (is (= {"poop" nil, "pam" "power", "ping" nil} (query-hash "http://www.example.com?poop&pam=power&ping="))))
+    (is (= {"poop" nil, "pam" "power", "ping" ""} (query-hash "http://www.example.com?poop&pam=power&ping="))))
 
   (testing "can turn a + into a space"
     (is (= {"value" "boom bam"} (query-hash "http://www.example.com?value=boom+bam"))))
