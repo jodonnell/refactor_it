@@ -17,9 +17,13 @@
     (conj (vector (replace-ampersand (replace-plus (first (clojure.string/split part #"="))))) nil)
     (mapv replace-ampersand (mapv replace-plus (clojure.string/split part #"=" 2)))))
 
+
+(defn drop-empty-key [things]
+  (filter #(not= "" (first %)) things))
+
 (defn query-hash [url]
   (if (= 2 (count (query-part url)))
-    (into {} (map split-on-equal (get-parts url)))
+    (into {} (drop-empty-key (map split-on-equal (get-parts url))))
     {}))
 
 

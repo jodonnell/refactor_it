@@ -15,3 +15,23 @@
 /tmp
 .DS_Store
 *.pyc
+
+
+# clojure stuff
+
+/code/clojure/target/*
+/code/cloj/lib/*
+/code/cloj/classes/*
+/code/cloj/checkouts/*
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.lein-deps-sum
+.lein-failures
+.lein-plugins
+.lein-repl-history
+
+
+/code/cloj/target/stale/extract-native.dependencies
+/code/cloj/target/repl-port
