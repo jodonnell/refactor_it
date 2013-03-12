@@ -5,7 +5,7 @@ function QueryStringParser(url) {
         q_str = url.substring(a+1, url.length);
         q_array = q_str.split('&')
         this.hash = {};
-        debugger
+
         for (i = 0; i < q_array.length; i++) {
             part = q_array[i];
             parts = this.splitQueryStringEqual(part);
