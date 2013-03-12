@@ -17,10 +17,8 @@
     (conj (vector (replace-ampersand (replace-plus (first (clojure.string/split part #"="))))) nil)
     (mapv replace-ampersand (mapv replace-plus (clojure.string/split part #"=" 2)))))
 
-
 (defn drop-empty-key [things]
   (filter #(not= "" (first %)) things))
-
 
 (defn merge-lists [& maps]
   (reduce (fn [m1 m2]
@@ -35,7 +33,5 @@
 
 (defn query-hash [url]
   (if (= 2 (count (query-part url)))
-    (zipmap (keys (get-hash url)) (map #(if (= 1 (count %)) (first %) %  ) (vals (get-hash url))))
+    (zipmap (keys (get-hash url)) (map #(if (= 1 (count %)) (first %) %) (vals (get-hash url))))
     {}))
-
-
