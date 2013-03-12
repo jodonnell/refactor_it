@@ -33,7 +33,7 @@
       = pluralize(refactored_code.votes.size, 'vote')
       total.
     %div{style: 'margin-top: 5px; margin-left: 20px;'}
-      %pre{class: 'prettyprint linenums lang-rb'}
+      %pre{class: "prettyprint linenums lang-#{@lang}"}
         = refactored_code.refactored_code.gsub("\n", '').html_safe
       - refactored_code.comments.each do |comment|      
         .comment{:style => 'margin-bottom: 10px'}
@@ -46,6 +46,6 @@
         = submit_tag 'Comment'
 
 Original code:
-%pre{class: 'prettyprint linenums lang-rb'}
+%pre{class: "prettyprint linenums lang-#{@lang}"}
   :plain
     #{@bad_code}

@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require prettify
+//= require lang-clj
+

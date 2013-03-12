@@ -21,17 +21,8 @@ class HomeController < ApplicationController
 
   def show_original_code
     @language = params[:language]
-    if @language == 'ruby'
-      bad_code
-      bad_code_specs
-    elsif @language == 'python'
-      @bad_code = File.open("#{Rails.root}/code/query_string_parser.py", 'r') { |f| f.read }
-      @bad_code_specs = File.open("#{Rails.root}/code/query_string_parser_test.py", 'r') { |f| f.read }
-    elsif @language == 'js'
-      @spec_instructions = 'To run the specs you will need Jasmine which you can download here: https://github.com/pivotal/jasmine/downloads.  Unzip it, copy the code below into the spec directory in the unzipped jasmine folder, name it query_string_parser_spec.js.  In the src directory create query_string_parser.js, this is where your code will go.  Edit the SpecRunner.html file and change the includes under <!-- include source files here... --> and <!-- include spec files here... --> to point to the files you just created.  Now open this file in your browser to run the specs.'
-      @bad_code = File.open("#{Rails.root}/code/js/src/query_string_parser.js", 'r') { |f| f.read }
-      @bad_code_specs = File.open("#{Rails.root}/code/js/spec/query_string_parser_spec.js", 'r') { |f| f.read }
-    end
+    get_code
+    get_lang
   end
 
   def submit_refactored_code
@@ -42,7 +33,8 @@ class HomeController < ApplicationController
 
   def list_refactored_code
     @language = params[:language]
-    bad_code
+    get_code
+    get_lang
     @refactored_codes = RefactoredCode.includes(:votes).where(:language => @language)
     @refactored_codes.sort! {|x, y| y.vote_tally <=> x.vote_tally }
   end
@@ -63,6 +55,9 @@ class HomeController < ApplicationController
     redirect_to list_refactored_code_path(:language => params[:language])
   end
 
+
+  private
+
   def bad_code
     @bad_code = File.open("#{Rails.root}/app/models/query_string_parser.rb", 'r') { |f| f.read }
   end
@@ -70,5 +65,26 @@ class HomeController < ApplicationController
   def bad_code_specs
     @bad_code_specs = File.open("#{Rails.root}/spec/models/query_string_parser_spec.rb", 'r') { |f| f.read }
     @bad_code_specs.gsub!('require "spec_helper"', '')
+  end
+  
+  def get_code
+    if @language == 'ruby'
+      bad_code
+      bad_code_specs
+    elsif @language == 'python'
+      @bad_code = File.open("#{Rails.root}/code/query_string_parser.py", 'r') { |f| f.read }
+      @bad_code_specs = File.open("#{Rails.root}/code/query_string_parser_test.py", 'r') { |f| f.read }
+    elsif @language == 'clojure'
+      @bad_code = File.open("#{Rails.root}/code/cloj/src/cloj/core.clj", 'r') { |f| f.read }
+      @bad_code_specs = File.open("#{Rails.root}/code/cloj/test/cloj/core_test.clj", 'r') { |f| f.read }
+    elsif @language == 'js'
+      @spec_instructions = 'To run the specs you will need Jasmine which you can download here: https://github.com/pivotal/jasmine/downloads.  Unzip it, copy the code below into the spec directory in the unzipped jasmine folder, name it query_string_parser_spec.js.  In the src directory create query_string_parser.js, this is where your code will go.  Edit the SpecRunner.html file and change the includes under <!-- include source files here... --> and <!-- include spec files here... --> to point to the files you just created.  Now open this file in your browser to run the specs.'
+      @bad_code = File.open("#{Rails.root}/code/js/src/query_string_parser.js", 'r') { |f| f.read }
+      @bad_code_specs = File.open("#{Rails.root}/code/js/spec/query_string_parser_spec.js", 'r') { |f| f.read }
+    end
+  end
+
+  def get_lang
+    @lang = {'clojure' => 'clj', 'ruby' => 'rb', 'python' => 'py', 'js' => 'js'}[@language]
   end
 end
