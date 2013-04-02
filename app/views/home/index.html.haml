@@ -4,6 +4,6 @@ WELCOME TO REFACTOR IT!!!
 LOG IN!!!
 %br/
 = form_tag login_path do
-  = text_field_tag :email
+  = text_field_tag :email, '', :placeholder => 'email@email.com'
   %br/
   = submit_tag 'Log In'
